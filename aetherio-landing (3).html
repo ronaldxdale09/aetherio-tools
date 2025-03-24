@@ -1,0 +1,1183 @@
+        .category-business {
+            background: rgba(79, 70, 229, 0.8);
+        }    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tool filtering functionality
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active tab
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.textContent.trim().toLowerCase();
+                    
+                    // Filter tools
+                    toolCards.forEach(card => {
+                        const cardCategory = card.querySelector('.category-label')?.textContent.trim().toLowerCase() || '';
+                        
+                        if (category === 'all tools') {
+                            // Show all cards with a staggered animation
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50 * Array.from(toolCards).indexOf(card));
+                        } else if (category === 'for students' && cardCategory.includes('student')) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50 * Array.from(toolCards).indexOf(card));
+                        } else if (category === 'for professionals' && cardCategory.includes('professional')) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50 * Array.from(toolCards).indexOf(card));
+                        } else if (category === 'for freelancers' && cardCategory.includes('freelancer')) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50 * Array.from(toolCards).indexOf(card));
+                        } else if (category === 'for creatives' && cardCategory.includes('creative')) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50 * Array.from(toolCards).indexOf(card));
+                        } else if (category === 'for business' && cardCategory.includes('business')) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50 * Array.from(toolCards).indexOf(card));
+                        } else {
+                            // Hide cards with animation
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(10px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Mobile menu functionality
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav ul');
+            
+            if (menuBtn && nav) {
+                menuBtn.addEventListener('click', function() {
+                    nav.classList.toggle('show');
+                    if (nav.classList.contains('show')) {
+                        nav.style.display = 'flex';
+                        setTimeout(() => {
+                            nav.style.opacity = '1';
+                            nav.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        nav.style.opacity = '0';
+                        nav.style.transform = 'translateY(-10px)';
+                        setTimeout(() => {
+                            nav.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetherio Solutions - Premium Tools For Everyone</title>
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #059669;
+            --primary-light: #10b981;
+            --accent: #047857;
+            --accent-light: #34d399;
+            --dark-bg: #0f172a;
+            --darker-bg: #030712;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(148, 163, 184, 0.1);
+            --glow-green: rgba(16, 185, 129, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            color: var(--text-secondary);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-light);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary-light), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 50%, rgba(109, 40, 217, 0.15), transparent 50%);
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 70%, rgba(16, 185, 129, 0.1), transparent 40%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero p.lead {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Tools Section */
+        .tools-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            background: rgba(30, 41, 59, 0.4);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.15);
+        }
+        
+        .category-tab:hover:not(.active) {
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(16, 185, 129, 0.03), transparent);
+            z-index: -1;
+            transform: translateY(100%);
+            transition: transform 0.6s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+        
+        .tool-card:hover::after {
+            transform: translateY(0);
+        }
+        
+        .tool-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+
+        .tool-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-light));
+            color: white;
+            font-size: 1.1rem;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-icon::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            z-index: -1;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tool-card:hover .tool-icon {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .tool-card:hover .tool-icon::before {
+            opacity: 1;
+        }
+        
+        .category-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0 0 0 8px;
+            background: rgba(16, 185, 129, 0.8);
+            color: white;
+        }
+        
+        .category-students {
+            background: rgba(6, 182, 212, 0.8);
+        }
+        
+        .category-professionals {
+            background: rgba(79, 70, 229, 0.8);
+        }
+        
+        .category-freelancers {
+            background: rgba(249, 115, 22, 0.8);
+        }
+        
+        .category-creatives {
+            background: rgba(236, 72, 153, 0.8);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background-size: 200% auto;
+            color: white;
+            border: none;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-light), var(--accent-light));
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            margin-left: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-outline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to top, var(--accent), transparent);
+            z-index: -1;
+            transition: height 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-light);
+            color: var(--text-primary);
+        }
+        
+        .btn-outline:hover::after {
+            height: 100%;
+        }
+
+        .btn-donate {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            background-size: 200% auto;
+            color: white;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-donate::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+
+        .btn-donate:hover {
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+            background-position: right center;
+        }
+        
+        .btn-donate:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Features */
+        .features {
+            background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.9), transparent);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+            top: 0;
+        }
+
+        .features::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+            bottom: 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-light), var(--accent));
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Call to Action */
+        .cta {
+            text-align: center;
+        }
+
+        .cta h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-light);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Glassmorphism Elements */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: 0.5s;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
+        .glass-effect {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .neo-brutalism {
+            background: var(--primary);
+            border: 2px solid var(--darker-bg);
+            box-shadow: 5px 5px 0px var(--darker-bg);
+            transform: translate(-2px, -2px);
+            transition: all 0.2s ease;
+        }
+        
+        .neo-brutalism:hover {
+            transform: translate(0, 0);
+            box-shadow: 0px 0px 0px var(--darker-bg);
+        }
+
+        /* Responsive Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floatAnimation {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 var(--glow-green); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-fadeUp {
+            animation: fadeUp 0.8s ease forwards;
+        }
+        
+        .animate-float {
+            animation: floatAnimation 6s ease-in-out infinite;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradientShift 10s ease infinite;
+        }
+        
+        .animate-shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        
+        .animate-rotate {
+            animation: rotate 15s linear infinite;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                opacity: 0;
+                transform: translateY(-10px);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(3, 7, 18, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border-color);
+                transition: all 0.3s ease;
+                z-index: 100;
+            }
+            
+            nav ul.show {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            }
+            
+            .tools-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .category-tab {
+                margin-bottom: 0.5rem;
+            }
+            
+            .achievements {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="animate-shimmer" style="display: inline-block; overflow: hidden;">Aetherio</span> Solutions
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-fadeUp">
+                <h1 class="animate-gradient">Premium Tools. Zero Cost. No Signups.</h1>
+                <p class="lead">Access a comprehensive suite of professional-grade tools designed to enhance productivity and simplify your workflow. No credit card, no account, just pure utility.</p>
+                <div>
+                    <a href="#tools" class="btn btn-primary animate-pulse">Explore Tools</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="decorative-circle large" style="position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.1), transparent 70%); top: 20%; right: -150px; z-index: -1; filter: blur(40px);"></div>
+        
+        <div class="decorative-circle small animate-float" style="position: absolute; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(4, 120, 87, 0.15), transparent 70%); bottom: 10%; left: 5%; z-index: -1; filter: blur(20px);"></div>
+        
+        <div class="decorative-dots animate-rotate" style="position: absolute; width: 200px; height: 200px; background-image: radial-gradient(var(--primary-light) 1px, transparent 1px); background-size: 20px 20px; opacity: 0.2; top: 25%; left: 10%; z-index: -1;"></div>
+    </section>
+
+    <section id="tools" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="animate-gradient">Featured Tools</h2>
+                <p>Discover our collection of powerful, free-to-use tools</p>
+                <div class="section-underline" style="position: relative; height: 3px; width: 120px; margin: 1.5rem auto; background: linear-gradient(90deg, var(--primary), var(--accent-light), var(--primary)); background-size: 200% 100%; animation: gradientShift 5s infinite;"></div>
+            </div>
+            
+            <div class="tools-categories">
+                <div class="category-tab active">All Tools</div>
+                <div class="category-tab">For Students</div>
+                <div class="category-tab">For Professionals</div>
+                <div class="category-tab">For Freelancers</div>
+                <div class="category-tab">For Creatives</div>
+                <div class="category-tab">For Business</div>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card animate-fadeUp delay-1">
+                    <div class="category-label category-professionals">Professional</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3>Resume Builder</h3>
+                    <p>Create professional resumes with ATS optimization and AI content suggestions.</p>
+                </div>
+
+                <div class="tool-card animate-fadeUp delay-2">
+                    <div class="category-label category-freelancers">Freelancer</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>Offline Budget Planner</h3>
+                    <p>Create budgets and track expenses with locally stored data and export options.</p>
+                </div>
+
+                <div class="tool-card animate-fadeUp delay-3">
+                    <div class="category-label category-business">Business</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Create interactive data visualizations and business analytics dashboards in minutes.</p>
+                </div>
+
+                <div class="tool-card animate-fadeUp">
+                    <div class="category-label">General</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3>Solar Calculator</h3>
+                    <p>Calculate potential solar savings and ROI based on location and energy usage.</p>
+                </div>
+
+                <div class="tool-card animate-fadeUp delay-1">
+                    <div class="category-label category-professionals">Professional</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <h3>Business Plan Generator</h3>
+                    <p>Create professional business plans with financial projections and market analysis.</p>
+                </div>
+
+                <div class="tool-card animate-fadeUp delay-2">
+                    <div class="category-label category-creatives">Creative</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h3>AI Text Generator</h3>
+                    <p>Generate blog posts, social media content, and marketing copy with AI technology.</p>
+                </div>
+                
+                <div class="tool-card animate-fadeUp">
+                    <div class="category-label category-students">Student</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3>Study Note Organizer</h3>
+                    <p>Create, organize, and share study notes with AI-powered summaries and flashcards.</p>
+                </div>
+                
+                <div class="tool-card animate-fadeUp delay-1">
+                    <div class="category-label category-freelancers">Freelancer</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                    </div>
+                    <h3>Invoice Generator</h3>
+                    <p>Create professional invoices with customizable templates and automatic tax calculations.</p>
+                </div>
+                
+                <div class="tool-card animate-fadeUp delay-2">
+                    <div class="category-label category-creatives">Creative</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3>Image Editor</h3>
+                    <p>Edit and enhance images with powerful tools, filters, and AI-powered enhancements.</p>
+                </div>
+                
+                <div class="tool-card animate-fadeUp delay-3">
+                    <div class="category-label category-students">Student</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3>Plagiarism Checker</h3>
+                    <p>Check content for plagiarism with our advanced AI detection system and citation tools.</p>
+                </div>
+                
+                <div class="tool-card animate-fadeUp">
+                    <div class="category-label category-professionals">Professional</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3>Meeting Planner</h3>
+                    <p>Schedule meetings with timezone support, agenda builder, and minutes template generator.</p>
+                </div>
+                
+                <div class="tool-card animate-fadeUp delay-1">
+                    <div class="category-label">General</div>
+                    <div class="tool-icon">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                    </div>
+                    <h3>Credit Score Simulator</h3>
+                    <p>Simulate the impact of financial decisions on your credit score with predictive modeling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="animate-gradient">Why Choose Us</h2>
+                <p>Premium features without the premium price tag</p>
+                <div class="section-underline" style="position: relative; height: 3px; width: 120px; margin: 1.5rem auto; background: linear-gradient(90deg, var(--primary), var(--accent-light), var(--primary)); background-size: 200% 100%; animation: gradientShift 5s infinite;"></div>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card glass-card">
+                    <h3>No Sign-up Required</h3>
+                    <p>Access all tools instantly without creating an account or providing personal information.</p>
+                </div>
+
+                <div class="tool-card glass-card">
+                    <h3>Premium Features</h3>
+                    <p>Enjoy professional-grade tools with features typically found in paid applications.</p>
+                </div>
+
+                <div class="tool-card glass-card">
+                    <h3>Privacy Focused</h3>
+                    <p>Your data never leaves your device. We prioritize your privacy with client-side processing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="cta">
+        <div class="container">
+            <div class="glass-effect" style="padding: 3rem; margin: 2rem auto; max-width: 800px;">
+                <h2 class="animate-gradient">Free Tools For Everyone</h2>
+                <div class="section-underline" style="position: relative; height: 3px; width: 120px; margin: 1.5rem auto; background: linear-gradient(90deg, var(--primary), var(--accent-light), var(--primary)); background-size: 200% 100%; animation: gradientShift 5s infinite;"></div>
+                <p>We believe in democratizing access to powerful digital tools. While all our tools are free to use, your support helps us maintain and develop new features.</p>
+                <div class="cta-buttons">
+                    <a href="#tools" class="btn btn-primary">Start Using Tools</a>
+                    <a href="#" class="btn btn-donate animate-pulse">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin-right: 8px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        Support Our Mission
+                    </a>
+                </div>
+                
+                <!-- Circular badges -->
+                <div class="achievements" style="display: flex; justify-content: center; gap: 2rem; margin-top: 3rem;">
+                    <div class="achievement-badge" style="text-align: center;">
+                        <div class="badge-circle animate-float" style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent-light)); display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);">
+                            <span style="font-size: 1.75rem; font-weight: 700; color: white;">10+</span>
+                        </div>
+                        <p style="margin-top: 1rem; font-weight: 500;">Free Tools</p>
+                    </div>
+                    
+                    <div class="achievement-badge" style="text-align: center;">
+                        <div class="badge-circle animate-float delay-1" style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent-light)); display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);">
+                            <span style="font-size: 1.75rem; font-weight: 700; color: white;">5K+</span>
+                        </div>
+                        <p style="margin-top: 1rem; font-weight: 500;">Daily Users</p>
+                    </div>
+                    
+                    <div class="achievement-badge" style="text-align: center;">
+                        <div class="badge-circle animate-float delay-2" style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent-light)); display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);">
+                            <span style="font-size: 1.75rem; font-weight: 700; color: white;">0</span>
+                        </div>
+                        <p style="margin-top: 1rem; font-weight: 500;">Sign-ups Needed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="decorative-circle large" style="position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.1), transparent 70%); bottom: -150px; left: -100px; z-index: -1; filter: blur(40px);"></div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Aetherio Solutions</h4>
+                    <p>Premium tools accessible to everyone. No barriers, no limitations.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Offline Budget Planner</a></li>
+                        <li><a href="#">Document Manager</a></li>
+                        <li><a href="#">Solar Calculator</a></li>
+                        <li><a href="#">View All Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Aetherio Solutions. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

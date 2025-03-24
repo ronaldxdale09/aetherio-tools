@@ -1,23 +1,27 @@
+// src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Tools from './pages/Tools';
+import Features from './pages/Features';
 import About from './pages/About';
-import ResumeBuilder from './pages/toolPages/ResumeBuilder';
-import BudgetPlanner from './pages/toolPages/BudgetPlanner';
+import './styles/globals.css';
 
-function App() {
+const App = () => {
   return (
-    <Router>
+    <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tools" element={<Tools />} />
+        <Route path="/features" element={<Features />} />
         <Route path="/about" element={<About />} />
-        <Route path="/tools/resume-builder" element={<ResumeBuilder />} />
-        <Route path="/tools/budget-planner" element={<BudgetPlanner />} />
       </Routes>
-    </Router>
+      <Footer />
+    </BrowserRouter>
   );
-}
+};
 
-export default App; 
+export default App;

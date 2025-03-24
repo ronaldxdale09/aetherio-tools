@@ -1,210 +1,139 @@
-@import './variables.css';
+// src/styles/globals.css
+:root {
+  --primary: #059669;
+  --primary-light: #10b981;
+  --accent: #047857;
+  --accent-light: #34d399;
+  --dark-bg: #0f172a;
+  --darker-bg: #030712;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(148, 163, 184, 0.1);
+  --glow-green: rgba(16, 185, 129, 0.2);
+}
 
-/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  font-family: var(--font-family-sans);
-  color: var(--text-color);
-  line-height: 1.5;
-  background-color: var(--background-color);
-}
-
 body {
-  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin-bottom: var(--spacing-md);
+/* Typography */
+h1, h2, h3, h4 {
+  font-weight: 700;
   line-height: 1.2;
 }
 
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, var(--primary-light), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 p {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 1.5rem;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: var(--text-secondary);
 }
 
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--primary-dark);
-  text-decoration: underline;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-/* Common components */
+/* Layout */
 .container {
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 2rem;
 }
 
-.card {
-  background-color: var(--background-color);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+section {
+  padding: 6rem 0;
 }
 
-.btn {
-  display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--border-radius-md);
-  border: none;
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: 500;
-  transition: background-color var(--transition-fast);
-}
-
-.btn:hover {
-  background-color: var(--primary-dark);
-  text-decoration: none;
-}
-
-.btn-secondary {
-  background-color: var(--secondary-color);
-}
-
-.btn-secondary:hover {
-  background-color: var(--secondary-dark);
-}
-
-/* Tool cards on home page */
-.tool-card {
-  background-color: var(--background-color);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.tool-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-.tool-link {
-  display: inline-block;
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: var(--border-radius-md);
-  font-weight: 500;
-}
-
-.tool-link:hover {
-  background-color: var(--primary-dark);
-  text-decoration: none;
-}
-
-/* Navigation */
-.back-link {
-  display: inline-block;
-  margin-bottom: var(--spacing-lg);
-  color: var(--text-light);
-}
-
-.back-link:before {
-  content: '←';
-  margin-right: var(--spacing-xs);
-}
-
-/* Form elements */
-.input-group {
-  margin-bottom: var(--spacing-md);
-}
-
-label {
-  display: block;
-  margin-bottom: var(--spacing-xs);
-  font-weight: 500;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: var(--spacing-sm);
-  border: 1px solid var(--text-muted);
-  border-radius: var(--border-radius-sm);
-  font-family: inherit;
-  font-size: 1rem;
-  background-color: var(--background-color);
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-.add-button {
-  background-color: transparent;
-  color: var(--primary-color);
-  border: 1px dashed var(--primary-color);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-sm);
-  margin-top: var(--spacing-sm);
-}
-
-.add-button:hover {
-  background-color: var(--primary-light);
-  color: white;
-}
-
-/* Responsive utilities */
-@media (max-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-sm);
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  h1 {
-    font-size: 1.5rem;
-  }
-  
-  .tool-card {
-    padding: var(--spacing-md);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Helpers */
-.text-center {
-  text-align: center;
+@keyframes floatAnimation {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.mt-1 {
-  margin-top: var(--spacing-sm);
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--glow-green); }
+  70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-.mt-2 {
-  margin-top: var(--spacing-md);
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.mt-3 {
-  margin-top: var(--spacing-lg);
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
 }
 
-.mb-1 {
-  margin-bottom: var(--spacing-sm);
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-.mb-2 {
-  margin-bottom: var(--spacing-md);
+.animate-fadeUp {
+  animation: fadeUp 0.8s ease forwards;
 }
 
-.mb-3 {
-  margin-bottom: var(--spacing-lg);
-} 
+.animate-float {
+  animation: floatAnimation 6s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.animate-rotate {
+  animation: rotate 15s linear infinite;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
