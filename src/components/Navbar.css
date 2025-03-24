@@ -79,6 +79,92 @@ nav a:hover {
   color: #f1f5f9;
 }
 
+/* Tools Dropdown Styles */
+.tools-dropdown {
+  position: relative;
+}
+
+.tools-dropdown-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.tools-dropdown-btn:hover {
+  color: #f1f5f9;
+}
+
+.tools-dropdown-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.tools-dropdown-btn svg.rotate {
+  transform: rotate(180deg);
+}
+
+.tools-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(3, 7, 18, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  min-width: 300px;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tools-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tool-item {
+  display: block;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.tool-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tool-item-content h4 {
+  color: #f1f5f9;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.tool-item-content p {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -120,6 +206,25 @@ nav a:hover {
 
   nav a {
     display: block;
+    padding: 0.5rem 1rem;
+  }
+
+  .tools-dropdown-menu {
+    position: static;
+    transform: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    max-height: none;
+  }
+
+  .tools-dropdown-menu.show {
+    transform: none;
+  }
+
+  .tool-item {
     padding: 0.5rem 1rem;
   }
 

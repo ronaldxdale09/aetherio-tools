@@ -1,5 +1,5 @@
 import React from 'react';
-import ToolsSection from '../components/sections/ToolsSection';
+import ToolsSection from '../../components/sections/ToolsSection';
 import './Tools.css';
 
 const Tools = () => {

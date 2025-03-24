@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter Generator - Aetherio Solutions</title>
+    <style>
+        /* CSS Reset & Base Styles */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+         :root {
+            --primary: #059669;
+            --primary-light: #10b981;
+            --accent: #047857;
+            --accent-light: #34d399;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            /* Light mode colors */
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+            --light-text-primary: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+            --light-input-bg: #f1f5f9;
+            /* Dark mode colors */
+            --dark-bg: #0f172a;
+            --dark-card: rgba(30, 41, 59, 0.7);
+            --dark-text-primary: #f1f5f9;
+            --dark-text-secondary: #94a3b8;
+            --dark-border: rgba(148, 163, 184, 0.1);
+            --dark-input-bg: rgba(15, 23, 42, 0.6);
+        }
+        
+        .light {
+            --bg: var(--light-bg);
+            --card-bg: var(--light-card);
+            --text-primary: var(--light-text-primary);
+            --text-secondary: var(--light-text-secondary);
+            --border-color: var(--light-border);
+            --input-bg: var(--light-input-bg);
+        }
+        
+        .dark {
+            --bg: var(--dark-bg);
+            --card-bg: var(--dark-card);
+            --text-primary: var(--dark-text-primary);
+            --text-secondary: var(--dark-text-secondary);
+            --border-color: var(--dark-border);
+            --input-bg: var(--dark-input-bg);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+        /* Typography */
+        
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary-light), var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            color: var(--text-secondary);
+        }
+        /* Layout */
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 2rem 0;
+        }
+        /* Header */
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary-light);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        /* Cover Letter Generator Section */
+        
+        .cover-letter-generator {
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+        /* Step-by-Step Wizard */
+        
+        .wizard-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+        /* Progress Bar */
+        
+        .progress-container {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 2px;
+            width: 100%;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+        
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            z-index: 2;
+            transition: width 0.3s ease;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            position: relative;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .step.completed {
+            background: var(--primary-light);
+            border-color: var(--primary-light);
+            color: white;
+        }
+        
+        .step-labels {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        
+        .step-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-align: center;
+            width: 80px;
+            margin-left: -25px;
+        }
+        
+        .step-label.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        /* Step Content */
+        
+        .step-content {
+            padding: 2rem;
+        }
+        
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .step-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        /* Form Styles */
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        /* Section Blocks */
+        
+        .section-block {
+            background: var(--input-bg);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .section-block:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .block-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .block-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-icon {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+        
+        .btn-icon:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .add-block-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: var(--input-bg);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .add-block-btn:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: white;
+        }
+        /* Navigation Buttons */
+        
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        /* Buttons */
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary-light);
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .btn-icon-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        /* Templates */
+        
+        .template-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .template-card {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .template-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+        }
+        
+        .template-img {
+            width: 100%;
+            height: 180px;
+            display: block;
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+        
+        .template-name {
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--input-bg);
+        }
+        /* Tone Selection */
+        
+        .tone-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .tone-option {
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tone-option:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .tone-option.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        /* Phrase Suggestions */
+        
+        .suggestions-container {
+            background: var(--input-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .suggestion-category {
+            margin-bottom: 1rem;
+        }
+        
+        .suggestion-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .suggestion-chip {
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .suggestion-chip:hover {
+            background: rgba(16, 185, 129, 0.2);
+            transform: translateY(-2px);
+        }
+        /* Preview Panel */
+        
+        .preview-container {
+            margin-top: 2rem;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .preview-panel {
+            background: var(--input-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            min-height: 400px;
+            max-height: 600px;
+            overflow-y: auto;
+            line-height: 1.8;
+            font-family: 'Georgia', serif;
+            white-space: pre-wrap;
+        }
+        
+        .letterhead {
+            margin-bottom: 2rem;
+        }
+        
+        .recipient {
+            margin-bottom: 1.5rem;
+        }
+        
+        .letter-body p {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .letter-closing {
+            margin-top: 2rem;
+        }
+        /* Export Options */
+        
+        .export-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .export-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .export-option:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        /* Footer */
+        
+        footer {
+            background: var(--card-bg);
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        /* Responsive */
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .step-content {
+                padding: 1.5rem;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .step-label {
+                font-size: 0.7rem;
+                width: 60px;
+                margin-left: -18px;
+            }
+            .template-options {
+                grid-template-columns: 1fr;
+            }
+            .export-options {
+                flex-direction: column;
+            }
+            .preview-panel {
+                padding: 1.5rem;
+            }
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        /* Hidden Steps */
+        
+        .step-pane {
+            display: none;
+        }
+        
+        .step-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Aetherio</span> Solutions
+            </a>
+            <button id="themeToggle" class="theme-toggle">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="moonIcon">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="sunIcon" style="display:none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <section class="cover-letter-generator">
+        <div class="container">
+            <h1>Professional Cover Letter Generator</h1>
+            <p>Create a tailored cover letter in minutes with our free, AI-powered builder. No account needed. Perfect for matching your resume and landing more interviews.</p>
+
+            <div class="wizard-container">
+                <!-- Progress Tracker -->
+                <div class="progress-container">
+                    <div class="progress-steps">
+                        <div class="progress-bar" style="width: 0%"></div>
+                        <div class="step active" data-step="1">1</div>
+                        <div class="step" data-step="2">2</div>
+                        <div class="step" data-step="3">3</div>
+                        <div class="step" data-step="4">4</div>
+                        <div class="step" data-step="5">5</div>
+                    </div>
+                    <div class="step-labels">
+                        <div class="step-label active">Basic Info</div>
+                        <div class="step-label">Job Details</div>
+                        <div class="step-label">Content</div>
+                        <div class="step-label">Style</div>
+                        <div class="step-label">Preview</div>
+                    </div>
+                </div>
+
+                <!-- Step Content -->
+                <div class="step-content">
+                    <!-- Step 1: Basic Information -->
+                    <div class="step-pane active" id="step1">
+                        <div class="step-title">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <h2>Your Information</h2>
+                        </div>
+                        <p class="step-subtitle">Enter your personal and contact information that will appear in the header of your cover letter.</p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name*</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name*</label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobTitle">Professional Title*</label>
+                            <input type="text" id="jobTitle" name="jobTitle" required placeholder="Frontend Developer">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email*</label>
+                                <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone*</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address*</label>
+                            <input type="text" id="address" name="address" required placeholder="123 Main St, City, State, ZIP">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="linkedin">LinkedIn URL (Optional)</label>
+                                <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/johndoe">
+                            </div>
+                            <div class="form-group">
+                                <label for="website">Website/Portfolio (Optional)</label>
+                                <input type="url" id="website" name="website" placeholder="https://johndoe.com">
+                            </div>
+                        </div>
+
+                        <div class="step-navigation">
+                            <div></div>
+                            <button class="btn btn-primary next-step" data-next="2">
+                                <span class="btn-icon-text">
+                                    Next: Job Details
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Job Details -->
+                    <div class="step-pane" id="step2">
+                        <div class="step-title">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                            <h2>Job Details</h2>
+                        </div>
+                        <p class="step-subtitle">Provide information about the job you're applying for and the company. This helps us personalize your cover letter.</p>
+
+                        <div class="form-group">
+                            <label for="jobPosition">Position You're Applying For*</label>
+                            <input type="text" id="jobPosition" name="jobPosition" required placeholder="Senior Frontend Developer">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName">Company Name*</label>
+                            <input type="text" id="companyName" name="companyName" required placeholder="Acme Inc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringManager">Hiring Manager's Name (if known)</label>
+                            <input type="text" id="hiringManager" name="hiringManager" placeholder="Jane Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringManagerTitle">Hiring Manager's Title (if known)</label>
+                            <input type="text" id="hiringManagerTitle" name="hiringManagerTitle" placeholder="Head of Engineering">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyAddress">Company Address (if needed)</label>
+                            <input type="text" id="companyAddress" name="companyAddress" placeholder="456 Business Ave, City, State, ZIP">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobDescription">Key Requirements from Job Description*</label>
+                            <textarea id="jobDescription" name="jobDescription" required placeholder="Paste key skills, qualifications, or requirements from the job posting that you want to highlight in your cover letter..."></textarea>
+                            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-secondary);">This helps our AI create a more targeted letter. Try to include 3-5 key requirements from the job posting.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="referral">How Did You Find This Job? (Optional)</label>
+                            <input type="text" id="referral" name="referral" placeholder="LinkedIn, Company Website, Referral from John Doe">
+                        </div>
+
+                        <div class="step-navigation">
+                            <button class="btn btn-secondary prev-step" data-prev="1">
+                            <span class="btn-icon-text">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                                Previous
+                            </span>
+                        </button>
+                            <button class="btn btn-primary next-step" data-next="3">
+                            <span class="btn-icon-text">
+                                Next: Content
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </button>
+                        </div>
+                    </div>
+                    <!-- Step 3: Content -->
+                    <div class="step-pane" id="step3">
+                        <div class="step-title">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <h2>Letter Content</h2>
+                        </div>
+                        <p class="step-subtitle">Customize the content of your cover letter to showcase your relevant experience and skills.</p>
+
+                        <div class="form-group">
+                            <label for="introduction">Introduction (How you found out about the position & your interest)</label>
+                            <textarea id="introduction" name="introduction" placeholder="I am writing to express my interest in the [Position] role at [Company], which I discovered through [Source]. With [X] years of experience in [relevant field/skill], I am excited about the opportunity to bring my expertise to your team."></textarea>
+                        </div>
+
+                        <div class="section-block">
+                            <div class="block-header">
+                                <h4>Key Achievements & Experience</h4>
+                                <div class="block-actions">
+                                    <button class="btn-icon">
+                                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievement1">Achievement/Experience 1*</label>
+                                <textarea id="achievement1" name="achievement1" required placeholder="Describe a specific achievement, project, or experience that relates to the job requirements. Use numbers and metrics when possible."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievement2">Achievement/Experience 2</label>
+                                <textarea id="achievement2" name="achievement2" placeholder="Describe another relevant achievement or experience that showcases your qualifications."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="section-block">
+                            <div class="block-header">
+                                <h4>Skills & Qualifications</h4>
+                                <div class="block-actions">
+                                    <button class="btn-icon">
+                                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="skills">Key Skills & Qualifications*</label>
+                                <textarea id="skills" name="skills" required placeholder="Highlight your most relevant skills and qualifications that match the job requirements. Focus on how these skills can benefit the company."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="section-block">
+                            <div class="block-header">
+                                <h4>Company Knowledge</h4>
+                                <div class="block-actions">
+                                    <button class="btn-icon">
+                                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="companyResearch">Why This Company?*</label>
+                                <textarea id="companyResearch" name="companyResearch" required placeholder="Show that you've researched the company. Mention specific things about their culture, values, products, or recent achievements that appeal to you."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="closing">Closing Statement*</label>
+                            <textarea id="closing" name="closing" required placeholder="Thank the reader for considering your application. Express enthusiasm about the opportunity to interview and discuss how you can contribute to the company."></textarea>
+                        </div>
+
+                        <div class="suggestions-container">
+                            <h3>Suggested Phrases</h3>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Click any phrase to insert it into your current text field.</p>
+
+                            <div class="suggestion-category">
+                                <div class="suggestion-title">Strong Openers</div>
+                                <div class="suggestion-chips">
+                                    <div class="suggestion-chip">I am excited to apply for...</div>
+                                    <div class="suggestion-chip">With [X] years of experience in...</div>
+                                    <div class="suggestion-chip">As an accomplished professional in...</div>
+                                    <div class="suggestion-chip">I was thrilled to discover the opportunity...</div>
+                                </div>
+                            </div>
+
+                            <div class="suggestion-category">
+                                <div class="suggestion-title">Skills & Achievements</div>
+                                <div class="suggestion-chips">
+                                    <div class="suggestion-chip">I successfully implemented...</div>
+                                    <div class="suggestion-chip">This resulted in a [X]% improvement in...</div>
+                                    <div class="suggestion-chip">My expertise in [skill] would allow me to...</div>
+                                    <div class="suggestion-chip">I led a team that delivered...</div>
+                                </div>
+                            </div>
+
+                            <div class="suggestion-category">
+                                <div class="suggestion-title">Company Knowledge</div>
+                                <div class="suggestion-chips">
+                                    <div class="suggestion-chip">I admire [Company]'s commitment to...</div>
+                                    <div class="suggestion-chip">Your recent announcement about...</div>
+                                    <div class="suggestion-chip">I'm particularly impressed by your...</div>
+                                    <div class="suggestion-chip">Your company values align with my...</div>
+                                </div>
+                            </div>
+
+                            <div class="suggestion-category">
+                                <div class="suggestion-title">Strong Closings</div>
+                                <div class="suggestion-chips">
+                                    <div class="suggestion-chip">I look forward to discussing how my skills...</div>
+                                    <div class="suggestion-chip">Thank you for considering my application...</div>
+                                    <div class="suggestion-chip">I'm excited about the possibility of joining...</div>
+                                    <div class="suggestion-chip">I would welcome the opportunity to elaborate...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-navigation">
+                            <button class="btn btn-secondary prev-step" data-prev="2">
+                                <span class="btn-icon-text">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    Previous
+                                </span>
+                            </button>
+                            <button class="btn btn-primary next-step" data-next="4">
+                                <span class="btn-icon-text">
+                                    Next: Style
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Style & Tone -->
+                    <div class="step-pane" id="step4">
+                        <div class="step-title">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                            <h2>Tone & Format</h2>
+                        </div>
+                        <p class="step-subtitle">Customize the style, tone, and formatting of your cover letter.</p>
+
+                        <h3>Choose a Template</h3>
+                        <div class="template-options">
+                            <div class="template-card active">
+                                <div class="template-img">
+                                    <img src="/api/placeholder/200/180" alt="Modern Template" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="template-name">Modern</div>
+                            </div>
+                            <div class="template-card">
+                                <div class="template-img">
+                                    <img src="/api/placeholder/200/180" alt="Traditional Template" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="template-name">Traditional</div>
+                            </div>
+                            <div class="template-card">
+                                <div class="template-img">
+                                    <img src="/api/placeholder/200/180" alt="Minimalist Template" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="template-name">Minimalist</div>
+                            </div>
+                            <div class="template-card">
+                                <div class="template-img">
+                                    <img src="/api/placeholder/200/180" alt="Creative Template" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="template-name">Creative</div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">Select Tone</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Choose the tone that best fits the company culture and position.</p>
+                        <div class="tone-options">
+                            <div class="tone-option active">Professional</div>
+                            <div class="tone-option">Conversational</div>
+                            <div class="tone-option">Enthusiastic</div>
+                            <div class="tone-option">Confident</div>
+                            <div class="tone-option">Creative</div>
+                            <div class="tone-option">Formal</div>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">Letter Formatting</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="letterDate">Date</label>
+                                <input type="date" id="letterDate" name="letterDate" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="salutation">Salutation</label>
+                                <select id="salutation" name="salutation">
+                                    <option value="Dear Hiring Manager,">Dear Hiring Manager,</option>
+                                    <option value="Dear [Company] Team,">Dear [Company] Team,</option>
+                                    <option value="Dear [Hiring Manager's Name],">Dear [Hiring Manager's Name],</option>
+                                    <option value="To Whom It May Concern,">To Whom It May Concern,</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="closingType">Closing</label>
+                                <select id="closingType" name="closingType">
+                                    <option value="Sincerely,">Sincerely,</option>
+                                    <option value="Best regards,">Best regards,</option>
+                                    <option value="Kind regards,">Kind regards,</option>
+                                    <option value="Thank you,">Thank you,</option>
+                                    <option value="Respectfully,">Respectfully,</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="signatureType">Signature</label>
+                                <select id="signatureType" name="signatureType">
+                                    <option value="typed">Typed Name</option>
+                                    <option value="typedWithTitle">Name with Professional Title</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">Additional Options</h3>
+                        <div class="form-group">
+                            <label for="letterLength">Letter Length</label>
+                            <select id="letterLength" name="letterLength">
+                                <option value="concise">Concise (200-300 words)</option>
+                                <option value="standard" selected>Standard (300-400 words)</option>
+                                <option value="detailed">Detailed (400-500 words)</option>
+                            </select>
+                        </div>
+
+                        <div class="step-navigation">
+                            <button class="btn btn-secondary prev-step" data-prev="3">
+                                <span class="btn-icon-text">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    Previous
+                                </span>
+                            </button>
+                            <button class="btn btn-primary next-step" data-next="5">
+                                <span class="btn-icon-text">
+                                    Next: Preview
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Preview & Download -->
+                    <div class="step-pane" id="step5">
+                        <div class="step-title">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <h2>Preview & Export</h2>
+                        </div>
+                        <p class="step-subtitle">Review your cover letter before downloading or sharing it.</p>
+
+                        <div class="preview-container">
+                            <div class="preview-header">
+                                <h3>Cover Letter Preview</h3>
+                                <div class="preview-actions">
+                                    <button class="btn btn-secondary" id="editLetter">
+                                        <span class="btn-icon-text">
+                                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                            Edit
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-primary" id="regenerateLetter">
+                                        <span class="btn-icon-text">
+                                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                            </svg>
+                                            Regenerate
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="preview-panel">
+                                <div class="letterhead">
+                                    <div><strong>John Doe</strong></div>
+                                    <div>123 Main St, City, State, ZIP</div>
+                                    <div>john.doe@example.com | (555) 123-4567</div>
+                                    <div>linkedin.com/in/johndoe</div>
+                                </div>
+
+                                <div class="date">March 25, 2025</div>
+
+                                <div class="recipient">
+                                    <div>Jane Smith</div>
+                                    <div>Head of Engineering</div>
+                                    <div>Acme Inc.</div>
+                                    <div>456 Business Ave, City, State, ZIP</div>
+                                </div>
+
+                                <div>Dear Jane Smith,</div>
+
+                                <div class="letter-body">
+                                    <p>I am writing to express my interest in the Senior Frontend Developer position at Acme Inc., which I discovered through LinkedIn. With over five years of experience in creating responsive, user-friendly web applications,
+                                        I am excited about the opportunity to bring my technical expertise and creative problem-solving skills to your innovative team.</p>
+
+                                    <p>In my current role at Tech Solutions Inc., I successfully led the development of a responsive web application that increased user engagement by 35%. I implemented modern frontend frameworks and established best practices
+                                        that reduced page load times by 40%, directly contributing to improved conversion rates. My expertise in JavaScript, React, and HTML/CSS perfectly aligns with the technical requirements outlined in your job description.</p>
+
+                                    <p>I particularly admire Acme Inc.'s commitment to creating intuitive user experiences and your recent product launch that focuses on accessibility. Your company's values of innovation and user-centric design resonate
+                                        strongly with my professional philosophy. I am confident that my passion for clean, efficient code and exceptional user interfaces would make me a valuable addition to your engineering team.</p>
+
+                                    <p>Thank you for considering my application. I look forward to the opportunity to discuss how my skills and experience can contribute to the continued success of Acme Inc. I am available for an interview at your convenience.</p>
+                                </div>
+
+                                <div class="letter-closing">
+                                    <div>Sincerely,</div>
+                                    <div style="margin-top: 3rem;">John Doe</div>
+                                    <div>Frontend Developer</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">Export Options</h3>
+                        <div class="export-options">
+                            <div class="export-option" id="downloadPDF">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg> Download as PDF
+                            </div>
+                            <div class="export-option" id="downloadWord">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg> Download as Word
+                            </div>
+                            <div class="export-option" id="copyText">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg> Copy to Clipboard
+                            </div>
+                            <div class="export-option" id="emailLetter">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg> Email as Attachment
+                            </div>
+                        </div>
+
+                        <div class="step-navigation">
+                            <button class="btn btn-secondary prev-step" data-prev="4">
+                                <span class="btn-icon-text">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    Previous
+                                </span>
+                            </button>
+                            <button class="btn btn-primary" id="finishButton">
+                                <span class="btn-icon-text">
+                                    Finish
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Aetherio Solutions. All data is stored locally in your browser. No personal information is sent to our servers.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle Functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const moonIcon = document.getElementById('moonIcon');
+            const sunIcon = document.getElementById('sunIcon');
+            const htmlEl = document.documentElement;
+
+            themeToggle.addEventListener('click', function() {
+                if (htmlEl.classList.contains('dark')) {
+                    // Switch to light mode
+                    htmlEl.classList.remove('dark');
+                    htmlEl.classList.add('light');
+                    moonIcon.style.display = 'none';
+                    sunIcon.style.display = 'block';
+                } else {
+                    // Switch to dark mode
+                    htmlEl.classList.remove('light');
+                    htmlEl.classList.add('dark');
+                    moonIcon.style.display = 'block';
+                    sunIcon.style.display = 'none';
+                }
+            });
+
+            // Wizard Navigation
+            const steps = document.querySelectorAll('.step');
+            const stepPanes = document.querySelectorAll('.step-pane');
+            const stepLabels = document.querySelectorAll('.step-label');
+            const progressBar = document.querySelector('.progress-bar');
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+
+            // Calculate progress percentage based on active step
+            function updateProgress(activeStep) {
+                const totalSteps = steps.length;
+                const stepWidth = 100 / (totalSteps - 1);
+                const progress = (activeStep - 1) * stepWidth;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            // Set active step
+            function setActiveStep(stepNumber) {
+                // Update step indicators
+                steps.forEach(step => {
+                    const stepNum = parseInt(step.dataset.step);
+                    step.classList.remove('active', 'completed');
+
+                    if (stepNum === stepNumber) {
+                        step.classList.add('active');
+                    } else if (stepNum < stepNumber) {
+                        step.classList.add('completed');
+                    }
+                });
+
+                // Update step labels
+                stepLabels.forEach((label, index) => {
+                    label.classList.remove('active');
+                    if (index + 1 === stepNumber) {
+                        label.classList.add('active');
+                    }
+                });
+
+                // Show active pane
+                stepPanes.forEach((pane, index) => {
+                    pane.classList.remove('active');
+                    if (index + 1 === stepNumber) {
+                        pane.classList.add('active');
+                    }
+                });
+
+                // Update progress bar
+                updateProgress(stepNumber);
+            }
+
+            // Next button click handler
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextStep = parseInt(this.dataset.next);
+                    setActiveStep(nextStep);
+                });
+            });
+
+            // Previous button click handler
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevStep = parseInt(this.dataset.prev);
+                    setActiveStep(prevStep);
+                });
+            });
+
+            // Template selection
+            const templateCards = document.querySelectorAll('.template-card');
+            templateCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    templateCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Tone selection
+            const toneOptions = document.querySelectorAll('.tone-option');
+            toneOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    toneOptions.forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Suggestion chips
+            const suggestionChips = document.querySelectorAll('.suggestion-chip');
+            suggestionChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    // Get the active textarea
+                    // Get the active textarea
+                    const activeTextarea = document.activeElement;
+
+                    if (activeTextarea && activeTextarea.tagName === 'TEXTAREA') {
+                        // Get the current cursor position
+                        const startPos = activeTextarea.selectionStart;
+                        const endPos = activeTextarea.selectionEnd;
+
+                        // Insert the suggestion text at cursor position or replace selected text
+                        const text = activeTextarea.value;
+                        const newText = text.substring(0, startPos) +
+                            this.textContent +
+                            text.substring(endPos);
+
+                        activeTextarea.value = newText;
+
+                        // Set cursor position after the inserted text
+                        const newCursorPos = startPos + this.textContent.length;
+                        activeTextarea.setSelectionRange(newCursorPos, newCursorPos);
+
+                        // Focus the textarea
+                        activeTextarea.focus();
+                    } else {
+                        // If no textarea is active, try to insert into the last focused one
+                        // This is a fallback and might not be the expected behavior
+                        const contentTextareas = document.querySelectorAll('#step3 textarea');
+                        if (contentTextareas.length > 0) {
+                            const lastTextarea = contentTextareas[contentTextareas.length - 1];
+                            lastTextarea.value += (lastTextarea.value ? ' ' : '') + this.textContent;
+                            lastTextarea.focus();
+                        }
+                    }
+                });
+            });
+
+            // Section block expand/collapse
+            const blockToggleButtons = document.querySelectorAll('.block-header .btn-icon');
+            blockToggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const block = this.closest('.section-block');
+                    const content = block.querySelectorAll('.form-group');
+
+                    content.forEach(el => {
+                        if (el.style.display === 'none') {
+                            el.style.display = 'block';
+                            this.innerHTML = `
+                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            `;
+                        } else {
+                            el.style.display = 'none';
+                            this.innerHTML = `
+                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            `;
+                        }
+                    });
+                });
+            });
+
+            // Current date for the letter
+            const letterDateInput = document.getElementById('letterDate');
+            if (letterDateInput) {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                letterDateInput.value = `${year}-${month}-${day}`;
+            }
+
+            // Export actions
+            const downloadPDF = document.getElementById('downloadPDF');
+            if (downloadPDF) {
+                downloadPDF.addEventListener('click', function() {
+                    alert('In a real implementation, this would download your cover letter as a PDF file.');
+                });
+            }
+
+            const downloadWord = document.getElementById('downloadWord');
+            if (downloadWord) {
+                downloadWord.addEventListener('click', function() {
+                    alert('In a real implementation, this would download your cover letter as a Word document.');
+                });
+            }
+
+            const copyText = document.getElementById('copyText');
+            if (copyText) {
+                copyText.addEventListener('click', function() {
+                    const previewText = document.querySelector('.preview-panel').innerText;
+
+                    // Create a temporary textarea element to copy the text
+                    const textarea = document.createElement('textarea');
+                    textarea.value = previewText;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            alert('Cover letter text copied to clipboard!');
+                        } else {
+                            alert('Unable to copy text. Please try again.');
+                        }
+                    } catch (err) {
+                        alert('An error occurred while copying: ' + err);
+                    }
+
+                    document.body.removeChild(textarea);
+                });
+            }
+
+            const emailLetter = document.getElementById('emailLetter');
+            if (emailLetter) {
+                emailLetter.addEventListener('click', function() {
+                    alert('In a real implementation, this would open your default email client with the cover letter attached.');
+                });
+            }
+
+            // Edit letter button
+            const editLetterBtn = document.getElementById('editLetter');
+            if (editLetterBtn) {
+                editLetterBtn.addEventListener('click', function() {
+                    setActiveStep(3); // Go back to content step
+                });
+            }
+
+            // Regenerate letter button
+            const regenerateLetterBtn = document.getElementById('regenerateLetter');
+            if (regenerateLetterBtn) {
+                regenerateLetterBtn.addEventListener('click', function() {
+                    alert('In a real implementation, this would use AI to regenerate your cover letter with the same information but different wording.');
+
+                    // Here we'd typically make an API call to an AI service
+                    // For demo, let's just simulate a loading state
+                    this.innerHTML = `
+                        <span class="btn-icon-text">
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="animate-spin">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Regenerating...
+                        </span>
+                    `;
+
+                    // Simulate completion after 2 seconds
+                    setTimeout(() => {
+                        this.innerHTML = `
+                            <span class="btn-icon-text">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Regenerate
+                            </span>
+                        `;
+                    }, 2000);
+                });
+            }
+
+            // Finish button
+            const finishButton = document.getElementById('finishButton');
+            if (finishButton) {
+                finishButton.addEventListener('click', function() {
+                    alert('Your cover letter has been completed! In a real implementation, you would be redirected to a confirmation page or dashboard.');
+                });
+            }
+
+            // Salutation update based on hiring manager name
+            const hiringManagerInput = document.getElementById('hiringManager');
+            const salutationSelect = document.getElementById('salutation');
+
+            if (hiringManagerInput && salutationSelect) {
+                hiringManagerInput.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        // Find the "Dear [Hiring Manager's Name]," option
+                        const hmOption = Array.from(salutationSelect.options).find(
+                            option => option.value === "Dear [Hiring Manager's Name],"
+                        );
+
+                        if (hmOption) {
+                            // Update the option text and value with the actual name
+                            const name = this.value.split(' ')[0]; // Get first name
+                            hmOption.text = `Dear ${name},`;
+                            hmOption.value = `Dear ${name},`;
+
+                            // Select this option
+                            salutationSelect.value = hmOption.value;
+                        }
+                    }
+                });
+            }
+
+            // Real-time preview update (simplified for demo)
+            // In a real implementation, this would be more comprehensive
+            // and would update all parts of the preview based on form inputs
+            function updateLetterPreview() {
+                // This is a placeholder for what would be a more complex function
+                // that builds the entire letter from the form inputs
+                console.log('Preview would be updated here');
+            }
+
+            // Listen for changes on key form fields
+            const keyFields = document.querySelectorAll('input, textarea, select');
+            keyFields.forEach(field => {
+                field.addEventListener('change', updateLetterPreview);
+            });
+
+            // Initialize with first step active
+            setActiveStep(1);
+
+            // Set up drag-and-drop for resume upload (not fully implemented in this demo)
+            const resumeDropArea = document.createElement('div');
+            resumeDropArea.className = 'resume-drop-area';
+            resumeDropArea.innerHTML = `
+                <div style="border: 2px dashed var(--border-color); padding: 2rem; text-align: center; border-radius: 8px; margin-top: 1rem;">
+                    <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin: 0 auto 1rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                    </svg>
+                    <p style="margin-bottom: 0.5rem;">Drag and drop your resume here</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary);">Our AI will extract relevant information to help create your cover letter</p>
+                </div>
+            `;
+
+            // Add this to the job details section in a real implementation
+            // For demo purposes, we'll add it programmatically
+            const jobDetailsSection = document.querySelector('#step2');
+            if (jobDetailsSection) {
+                jobDetailsSection.appendChild(resumeDropArea);
+            }
+
+            // Initialize date formatter for the letter preview
+            const dateOptions = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            const letterDate = document.querySelector('.date');
+            if (letterDate) {
+                letterDate.textContent = new Date().toLocaleDateString('en-US', dateOptions);
+            }
+        });
+    </script>
+</body>
+
+</html>

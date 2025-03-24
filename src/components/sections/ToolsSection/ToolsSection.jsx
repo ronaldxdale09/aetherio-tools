@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './ToolsSection.css';
 
 const ToolsSection = () => {
@@ -22,7 +23,19 @@ const ToolsSection = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       ),
-      category: 'professional'
+      category: 'professional',
+      path: '/tools/resume-builder'
+    },
+    {
+      name: 'Cover Letter Generator',
+      description: 'Create a tailored cover letter in minutes with our free, AI-powered builder. No account needed. Perfect for matching your resume and landing more interviews.',
+      icon: (
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      category: 'professional',
+      path: '/tools/cover-letter-generator'
     },
     {
       name: 'Offline Budget Planner',
@@ -116,7 +129,8 @@ const ToolsSection = () => {
 
       <div className="tools-grid">
         {filteredTools.map((tool, index) => (
-          <div 
+          <Link 
+            to={tool.path}
             key={index} 
             className="tool-card animate-fadeUp" 
             style={{ animationDelay: `${index * 0.1}s` }}
@@ -129,7 +143,7 @@ const ToolsSection = () => {
             </div>
             <h3>{tool.name}</h3>
             <p>{tool.description}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
