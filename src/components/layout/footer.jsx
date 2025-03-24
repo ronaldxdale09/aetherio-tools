@@ -4,36 +4,30 @@ import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="footer">
       <div className="container">
-        <div className="footer-grid">
-          <div className="footer-column">
-            <h4>Aetherio Solutions</h4>
-            <p>Premium tools accessible to everyone. No barriers, no limitations.</p>
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3>Aetherio Tools</h3>
+            <p>Empowering your workflow with powerful tools and solutions.</p>
           </div>
-          <div className="footer-column">
-            <h4>Tools</h4>
-            <ul>
-              <li><Link to="/tools/resume-builder">Resume Builder</Link></li>
-              <li><Link to="/tools/budget-planner">Offline Budget Planner</Link></li>
-              <li><Link to="/tools/document-manager">Document Manager</Link></li>
-              <li><Link to="/tools/solar-calculator">Solar Calculator</Link></li>
-              <li><Link to="/tools">View All Tools</Link></li>
-            </ul>
+          <div className="footer-section">
+            <h4>Quick Links</h4>
+            <nav className="footer-nav">
+              <Link to="/">Home</Link>
+              <Link to="/tools">Tools</Link>
+              <Link to="/features">Features</Link>
+              <Link to="/about">About</Link>
+            </nav>
           </div>
-          <div className="footer-column">
-            <h4>Company</h4>
-            <ul>
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/blog">Blog</Link></li>
-              <li><Link to="/privacy">Privacy Policy</Link></li>
-              <li><Link to="/terms">Terms of Service</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
-            </ul>
+          <div className="footer-section">
+            <h4>Contact</h4>
+            <p>Email: info@aetheriotools.com</p>
+            <p>Phone: (555) 123-4567</p>
           </div>
         </div>
-        <div className="copyright">
-          &copy; {new Date().getFullYear()} Aetherio Solutions. All rights reserved.
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Aetherio Tools. All rights reserved.</p>
         </div>
       </div>
     </footer>

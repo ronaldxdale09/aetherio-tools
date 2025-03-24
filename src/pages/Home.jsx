@@ -1,16 +1,19 @@
 import React from 'react';
-import Hero from '../components/home/Hero';
 import ToolsSection from '../components/sections/ToolsSection';
 import FeaturesSection from '../components/sections/FeaturesSection';
-import AboutSection from '../components/sections/AboutSection';
+import './Home.css';
 
 const Home = () => {
   return (
-    <main>
-      <Hero />
-      <ToolsSection />
+    <main className="home">
+      <section className="hero">
+        <div className="container">
+          <h1>Welcome to Aetherio Tools</h1>
+          <p>Your one-stop solution for powerful development tools</p>
+        </div>
+      </section>
       <FeaturesSection />
-      <AboutSection />
+      <ToolsSection />
     </main>
   );
 };

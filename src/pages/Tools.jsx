@@ -1,14 +1,17 @@
 import React from 'react';
 import ToolsSection from '../components/sections/ToolsSection';
+import './Tools.css';
 
 const Tools = () => {
   return (
-    <main style={{ paddingTop: '100px' }}>
-      <div className="container">
-        <h1>All Tools</h1>
-        <p>Browse our complete collection of free, powerful tools</p>
-        <ToolsSection />
-      </div>
+    <main className="tools-page">
+      <section className="tools-header">
+        <div className="container">
+          <h1>Our Tools</h1>
+          <p>Discover our collection of powerful development tools</p>
+        </div>
+      </section>
+      <ToolsSection />
     </main>
   );
 };
