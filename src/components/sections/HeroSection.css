@@ -1,0 +1,176 @@
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 50%, rgba(109, 40, 217, 0.15), transparent 50%);
+  z-index: -1;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 70%, rgba(16, 185, 129, 0.1), transparent 40%);
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero p.lead {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  margin-bottom: 2.5rem;
+  color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  background-size: 200% auto;
+  color: white;
+  border: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, var(--primary-light), var(--accent-light));
+  z-index: -1;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  margin-left: 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-outline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(to top, var(--accent), transparent);
+  z-index: -1;
+  transition: height 0.3s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary-light);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover::after {
+  height: 100%;
+}
+
+/* Decorative Elements */
+.decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: -1;
+}
+
+.decorative-circle.large {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1), transparent 70%);
+  top: 20%;
+  right: -150px;
+}
+
+.decorative-circle.small {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(4, 120, 87, 0.15), transparent 70%);
+  bottom: 10%;
+  left: 5%;
+  filter: blur(20px);
+}
+
+.decorative-dots {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: radial-gradient(var(--primary-light) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.2;
+  top: 25%;
+  left: 10%;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+    padding: 6rem 0;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    margin: 0 auto;
+  }
+
+  .btn-outline {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .decorative-circle.large {
+    width: 200px;
+    height: 200px;
+    right: -100px;
+  }
+
+  .decorative-circle.small {
+    width: 100px;
+    height: 100px;
+  }
+} 

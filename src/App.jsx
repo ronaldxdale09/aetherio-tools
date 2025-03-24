@@ -1,27 +1,25 @@
 // src/App.jsx
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import Home from './pages/Home';
-import Tools from './pages/Tools';
-import Features from './pages/Features';
-import About from './pages/About';
-import './styles/globals.css';
+import Navbar from './components/Navbar';
+import HeroSection from './components/sections/HeroSection';
+import WhyChooseUs from './components/sections/WhyChooseUs';
+import ToolsSection from './components/sections/ToolsSection';
+import Footer from './components/Footer';
+import './App.css';
 
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tools" element={<Tools />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+    <div className="app">
+      <Navbar />
+      <main>
+        <HeroSection />
+        <ToolsSection />
+        <WhyChooseUs />
+
+      </main>
       <Footer />
-    </BrowserRouter>
+    </div>
   );
-};
+}
 
 export default App;
